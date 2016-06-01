@@ -2,19 +2,15 @@
 
 ##signature test
 
-1. install the necessary gems with:
-
-```bundle install```
+1. install the necessary gems with: ```bundle install```
 
 2. Edit the "runme.rb" to include your Cloud Storage credentials
 
 3. Add a test file to the local directory and add the filename to runme.rb
-   **n.b the file must have a recognised file extension or the 'files.head'
+..*   **n.b the file must have a recognised file extension or the 'files.head'
 method fails with a 500 error.**
 
-4. run the test with:
-
-```bundle exec ruby runme.rb```
+4. run the test with: ```bundle exec ruby runme.rb```
 
 
 The script will:
