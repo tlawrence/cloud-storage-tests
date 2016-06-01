@@ -1,17 +1,19 @@
-#Test for Skyscape CLoud Storage (Object Store)
+#Test for Skyscape Cloud Storage (Object Store)
 
 ##signature test
 
-install the necessary gems with:
+1. install the necessary gems with:
+
 ```bundle install```
 
-Edit the "runme.rb" to include your Cloud Storage credentials
+2. Edit the "runme.rb" to include your Cloud Storage credentials
 
-Add a test file to the local directory and add the filename to runme.rb
-n.b the file must have a recognised file extension or the 'files.head'
-method fails with a 500 error.
+3. Add a test file to the local directory and add the filename to runme.rb
+   **n.b the file must have a recognised file extension or the 'files.head'
+method fails with a 500 error.**
 
-run the test with:
+4. run the test with:
+
 ```bundle exec ruby runme.rb```
 
 
