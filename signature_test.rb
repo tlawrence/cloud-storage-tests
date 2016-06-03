@@ -37,7 +37,8 @@ module Skyscape
 
 
           #get local  file signature
-          puts "Local File Signature: #{Digest::MD5.file(filename).to_s}"
+          local_sig = Digest::MD5.file(filename).to_s
+          puts "Local File Signature: #{local_sig}"
 
 
 
@@ -54,9 +55,24 @@ module Skyscape
 
 
 
+          #add some metadata
+          puts "Adding Metadata"
+          file.metadata={'x-amz-meta-monkey' => 'tennis'}
+          file.save
+          puts "Metadata Saved"
+
+
+
+          #read the metadata
+          file = dir.files.head(filename)
+          file.metadata.each {|k,v| puts "Metadata Entry: #{k} = #{v}" if k =~ /^x-amz-meta/}
+
+
+
           #check remote signature
           file = dir.files.head(filename)
-          puts "Remote File Signature On Cloud Storage: #{file.etag}"
+          remote_sig = file.etag
+          puts "Remote File Signature On Cloud Storage: #{remote_sig}"
 
 
 
@@ -71,7 +87,8 @@ module Skyscape
 
 
           #check signature of downloaded file
-          puts "Downloaded File Signature: #{Digest::MD5.file(new_filename).to_s}"
+          downloaded_sig = Digest::MD5.file(new_filename).to_s
+          puts "Downloaded File Signature: #{downloaded_sig}"
 
 
 
@@ -84,6 +101,13 @@ module Skyscape
           #delete local file
           puts "Deleting Downloaded File"
           File.delete(new_filename)
+
+          puts "\nSignatures:\n\nLocal: #{local_sig}\nRemote: #{remote_sig}\nDownloaded: #{downloaded_sig}\n\n"
+          if remote_sig == local_sig && downloaded_sig == local_sig then
+            puts "ALL SIGNATURES MATCHED"
+          else
+            puts "SOME SIGNATURES DID NOT MATCH"
+          end
        end
       end
     end
